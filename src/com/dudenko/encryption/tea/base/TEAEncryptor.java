@@ -1,7 +1,7 @@
 package com.dudenko.encryption.tea.base;
 
-import com.dudenko.encryption.tea.base.deserializers.IntToCharSerializer;
-import com.dudenko.encryption.tea.base.serializers.CharToIntSerializer;
+import com.dudenko.encryption.tea.base.dataconverters.CharToIntConverter;
+import com.dudenko.encryption.tea.base.dataconverters.IntToCharConverter;
 
 public class TEAEncryptor {
     /* a key schedule constant */
@@ -20,9 +20,9 @@ public class TEAEncryptor {
         int[] buffer = new int[paddedSize + 1];
         buffer[0] = data.length;
 
-        new CharToIntSerializer().serialize(data, buffer, 1);
+        new CharToIntConverter().convert(data, buffer, 1);
         encrypt(buffer);
-        return new IntToCharSerializer().deserialize(buffer, 0, buffer.length * 4);
+        return new IntToCharConverter().convert(buffer, 0, buffer.length * 4);
     }
 
 

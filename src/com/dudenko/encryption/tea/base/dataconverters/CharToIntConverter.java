@@ -1,7 +1,7 @@
-package com.dudenko.encryption.tea.base.serializers;
+package com.dudenko.encryption.tea.base.dataconverters;
 
-public class CharToIntSerializer {
-    public void serialize(byte[] data, int[] result, int bufferOffset) {
+public class CharToIntConverter {
+    public void convert(byte[] data, int[] result, int bufferOffset) {
         assert bufferOffset + (data.length / 4) <= result.length;
 
         int shift = 24;

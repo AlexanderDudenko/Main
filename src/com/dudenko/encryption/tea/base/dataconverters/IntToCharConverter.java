@@ -1,7 +1,7 @@
-package com.dudenko.encryption.tea.base.deserializers;
+package com.dudenko.encryption.tea.base.dataconverters;
 
-public class IntToCharSerializer {
-    public byte[] deserialize(int[] data, int dataOffset, int dataLength) {
+public class IntToCharConverter {
+    public byte[] convert(int[] data, int dataOffset, int dataLength) {
         assert dataLength <= (data.length - dataOffset) * 4;
         byte[] result = new byte[dataLength];
         int i = dataOffset;
