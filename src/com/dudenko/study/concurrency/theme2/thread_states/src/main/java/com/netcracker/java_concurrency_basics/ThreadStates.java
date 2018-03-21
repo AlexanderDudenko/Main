@@ -4,7 +4,10 @@ public class ThreadStates {
     public static void main(String[] args) {
         printNewState();
         printRunnableState();
-        printBlockedState();
+        printTerminatedState();
+        printTimeWaitingState();
+        printWaitingState();
+//        printBlockedState();
     }
 
     private static void printNewState() {
@@ -29,6 +32,71 @@ public class ThreadStates {
 
         Thread t = new Thread(r);
         t.start();
+        System.out.println(t.getState());
+    }
+
+    private static void printTerminatedState() {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+            }
+
+        };
+
+        Thread t = new Thread(r);
+        t.start();
+        while (t.getState() != Thread.State.TERMINATED) {
+
+        }
+        // or sleep - not garaunted
+        // or join ?
+        System.out.println(t.getState());
+    }
+
+    private static void printTimeWaitingState() {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
+
+        Thread t = new Thread(r);
+        t.start();
+
+        while (t.getState() != Thread.State.TIMED_WAITING) {
+
+        }
+        System.out.println(t.getState());
+    }
+
+    private static void printWaitingState() {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        };
+
+        Thread t = new Thread(r);
+        t.start();
+
+        while (t.getState() != Thread.State.WAITING) {
+
+        }
+
         System.out.println(t.getState());
     }
 
