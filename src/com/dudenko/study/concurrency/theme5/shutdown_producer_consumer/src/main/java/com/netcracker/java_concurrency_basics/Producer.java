@@ -20,17 +20,35 @@ class Producer {
     private void doJob() {
         // Implement.
 
-        // Replace <id> with real id.
-        String msg = "PROD" + id + "-" + "<id>";
+        for (int i = 0; i < msgNum; ++i) {
+            //TODO
+            if (t.isInterrupted()) {
+                System.out.println("Producer " + id + " interrupted!");
+                break;
+            }
 
-        System.out.println("Sent message: " + msg);
+            String msg = "PROD" + id + "-" + i;
+            try {
+                Thread.sleep(50);
+
+                queue.offer(msg);
+
+                System.out.println("Sent message: " + msg);
+
+            } catch (InterruptedException e) {
+                System.out.println("Producer " + id + " interrupted! (exception)");
+                break;
+            }
+        }
+
     }
 
     void start() {
-        // Implement.
+        t.start();
     }
 
     void shutdown() {
-        // Implement.
+        t.interrupt();
+        System.out.println("Producer " + id + " has been shutdowned");
     }
 }

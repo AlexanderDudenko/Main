@@ -24,7 +24,28 @@ public class Launcher {
         }
 
         // Start producers and consumers.
+        for (Consumer consumer : consumers) {
+            consumer.start();
+        }
 
-        // Shutdown producers and consumers.
+        for (Producer producer : producers) {
+            producer.start();
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for (Producer producer : producers) {
+            producer.shutdown();
+        }
+
+        for (Consumer consumer : consumers) {
+            consumer.shutdown();
+        }
+
+        // No shutdown is needed.
     }
 }

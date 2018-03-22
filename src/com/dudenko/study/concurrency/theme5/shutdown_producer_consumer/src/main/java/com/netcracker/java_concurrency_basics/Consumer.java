@@ -16,17 +16,24 @@ class Consumer {
     }
 
     private void doJob() {
-        // Implement.
-
-        // Replace <msg> with real msg.
-        System.out.println("CONS" + id + " received message: " + "<msg>");
+        String queueMsg;
+        try {
+            while (!t.isInterrupted()) {
+                queueMsg = queue.take();
+                System.out.println("CONS" + id + " received message: " + queueMsg);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("CONS" + id + " interrupted!");
+//            e.fillInStackTrace();
+        }
     }
 
     void start() {
-        // Implement.
+        t.start();
     }
 
     void shutdown() {
-        // Implement.
+        t.interrupt();
+        System.out.println("Consumer " + id + " has been shutdowned");
     }
 }
