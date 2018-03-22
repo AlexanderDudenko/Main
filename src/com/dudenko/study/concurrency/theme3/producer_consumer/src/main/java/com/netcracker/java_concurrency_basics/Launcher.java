@@ -24,6 +24,13 @@ public class Launcher {
         }
 
         // Start producers and consumers.
+        for (Consumer consumer : consumers) {
+            consumer.start();
+        }
+
+        for (Producer producer : producers) {
+            producer.start();
+        }
 
         // No shutdown is needed.
     }

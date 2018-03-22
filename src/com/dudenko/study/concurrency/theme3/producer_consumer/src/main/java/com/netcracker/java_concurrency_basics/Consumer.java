@@ -16,13 +16,19 @@ class Consumer {
     }
 
     private void doJob() {
-        // Implement.
-
-        // Replace <msg> with real msg.
-        System.out.println("CONS" + id + " received message: " + "<msg>");
+        String queueMsg;
+        while (true) {
+            try {
+                queueMsg = queue.take();
+                // Replace <msg> with real msg.
+                System.out.println("CONS" + id + " received message: " + queueMsg);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     void start() {
-        // Implement.
+        t.start();
     }
 }

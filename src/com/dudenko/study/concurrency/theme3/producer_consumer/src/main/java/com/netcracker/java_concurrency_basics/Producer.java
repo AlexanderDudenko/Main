@@ -20,13 +20,22 @@ class Producer {
     private void doJob() {
         // Implement.
 
-        // Replace <id> with real id.
-        String msg = "PROD" + id + "-" + "<id>";
+        for (int i = 0; i < msgNum; ++i) {
+            String msg = "PROD" + id + "-" + i;
+            try {
 
-        System.out.println("Sent message: " + msg);
+                queue.offer(msg);
+
+                System.out.println("Sent message: " + msg);
+                Thread.sleep(50);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     void start() {
-        // Implement.
+        t.start();
     }
 }
