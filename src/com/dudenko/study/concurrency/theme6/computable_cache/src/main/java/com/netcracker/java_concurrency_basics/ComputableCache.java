@@ -16,7 +16,7 @@ public class ComputableCache<K, V> {
 
             System.out.println(Thread.currentThread().getName() + ": miss");
         } else {
-            System.out.println(Thread.currentThread().getName() + ": hit");
+            System.out.println(Thread.currentThread().getName() + ": hit key = " + res);
         }
 
         return res;
